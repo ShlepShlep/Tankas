@@ -23,13 +23,15 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Boom")
         {
-            Destroy(collision.gameObject);
+            
 
             for (int i = 0; i < particleCount; i++)
             {
                 var offset = Random.insideUnitSphere;
-                Instantiate(particle, transform.position + offset, transform.rotation);
+                Instantiate(particle, transform.position, transform.rotation);
             }
+
+            collision.gameObject.GetComponent<Health>().Damage();
         }
         Destroy(gameObject);
     }

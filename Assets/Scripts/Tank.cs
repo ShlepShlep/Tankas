@@ -14,12 +14,17 @@ public class Tank : MonoBehaviour
     public GameObject bullet;
     public Transform shootPoint;
 
+    public AudioSource source;
+    public AudioClip clip;
+
+    public AudioSource source2;
+    public AudioClip clip2;
+
     void Update()
     {
         var vertical = Input.GetAxis(verticalAxis);
         //transform.position += transform.forward * speed * vertical * Time.deltaTime;
         GetComponent<Rigidbody>().velocity = transform.forward * speed * vertical;
-
         var horizontal = Input.GetAxis(horizontalAxis);
         transform.Rotate(0, 90 * Time.deltaTime * horizontal, 0);
 
@@ -27,6 +32,8 @@ public class Tank : MonoBehaviour
         {
             print("Shoot");
             Instantiate(bullet, shootPoint.position, shootPoint.rotation);
+            source.clip = clip;
+            source.Play();
         }
     }
 }
